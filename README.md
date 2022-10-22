@@ -2,7 +2,7 @@
 
 ## Installation (no docker mode)
 
-- `make` to install dependencies
+- `make` to compile
 - `./a.out` to lauch the app
 
 ## Personalisation

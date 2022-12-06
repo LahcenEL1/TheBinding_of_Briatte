@@ -1,0 +1,18 @@
+{4}
+---
+name=Bucket of Lard
+hpMax=2
+dmg=-0.1
+---
+name=Holy Grail
+hpMax=1
+flight=true
+---
+name=Magic Mushroom
+hpMax=1
+shield=1
+dmg=1
+---
+name=Spirit of the Night
+ss=true
+flight=true

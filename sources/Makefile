@@ -1,9 +1,19 @@
+CLASS=CLI
 CC=gcc
-CFLAGS=-Wall -g3
-LDFLAGS=-lncurses
-LDLIBS=
-PROGNAME=tbob
+CFLAGS=-Wall -g3 -D_$(CLASS)
+PROGNAME=tbob_$(CLASS)
 ROOTDIR=
+LDFLAGS=
+LDLIBS=
+DEPS=
+
+ifeq ($(CLASS), CLI)
+LDFLAGS=-lncurses
+DEPS=rtbob.o itbob.o mtbob.o crud_piece.o stage.o tbob_logic.o tbob_cli.o main.c
+else
+LDFLAGS=-lSDL2 -lSDL2_image
+DEPS=rtbob.o itbob.o mtbob.o crud_piece.o stage.o tbob_logic.o tbob_gui.o main.c 
+endif
 
 all: $(PROGNAME)
 
@@ -19,10 +29,22 @@ itbob.o: itbob.c itbob.h
 mtbob.o: mtbob.c mtbob.h 
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-main.o: main.c rtbob.h itbob.h mtbob.h crud_piece.h
+stage.o: stage.c stage.h rtbob.h itbob.h mtbob.h
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-$(PROGNAME): rtbob.o itbob.o mtbob.o crud_piece.o main.o 
+tbob_logic.o: tbob_logic.c tbob_logic.h
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+tbob_cli.o: tbob_cli.c tbob_cli.h stage.h
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+tbob_gui.o: tbob_gui.c tbob_gui.h stage.h
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+main.o: main.c rtbob.h itbob.h mtbob.h stage.h crud_piece.h
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(PROGNAME): $(DEPS)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 clean:

@@ -45,5 +45,9 @@ room_t * read_rtbob_rooms ( FILE * fin, int n_w, int n_h);
 
 void add_rtbob_rooms ( dungeon_rooms * dr, room_t * r);
 
+room_t * gen_empty_room ( int h, int w, piece_kind kind);
+
+room_t * rtbob_clone_room( room_t * r);
+
 //room_t * get_rtbob_rooms ( dungeon_rooms * dr, int indice);
 #endif

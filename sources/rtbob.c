@@ -154,3 +154,46 @@ void free_rtbob ( dungeon_rooms dr)
 	free ( dr.rooms);
 }
 
+room_t * gen_empty_room ( int h, int w, piece_kind kind)
+{
+	room_t * r = (room_t *) malloc ( sizeof ( room_t));
+
+	r->kind = kind;
+	r->height = h;
+	r->width = w;
+	r->piece = (char **) malloc ( h * sizeof (char*));
+	
+	for (int i = 0; i < h; i++)
+	{
+		r->piece[i] = (char *) malloc ( w * sizeof (char));
+	}
+	for (int i = 0; i < h; i++)
+		for (int j = 0; j < w; j++)
+			r->piece[i][j] = ' ';
+	for (int i = 0; i < h; i++)
+	{
+		r->piece[i][0] = 'W';
+		r->piece[i][w-1] = 'W';
+	}
+	for (int i = 0; i < w; i++)
+	{
+		r->piece[0][i] = 'W';
+		r->piece[h-1][i] = 'W';
+	}
+	return r;	
+}
+
+room_t * rtbob_clone_room( room_t * r)
+{
+	room_t * ret = (room_t *) malloc ( sizeof ( room_t));
+	ret->kind = r->kind;
+	ret->width = r->width;
+	ret->height = r->height;
+	ret->piece = (char **) malloc ( r->height * sizeof ( char*));
+	for (int i = 0; i < r->height; i++)
+		ret->piece[i] = (char *) malloc ( r->width * sizeof ( char));
+	for (int i = 0; i < r->height; i++)
+		for (int j = 0; j < r->width; j++)
+			ret->piece[i][j] = r->piece[i][j];
+	return ret;
+}

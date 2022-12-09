@@ -10,7 +10,7 @@ int tbob_get_action_type ( int key)
 {
 	//~ printf ( "%d | %d %d%d %d %d %d %d\n", key, TBOB_LEFT, TBOB_UP, TBOB_RIGHT || key == TBOB_DOWN
 	if ( key == TBOB_LEFT || key == TBOB_UP || key == TBOB_RIGHT || key == TBOB_DOWN)	return 1 /*<<4*/;	// Action move
-	if ( key == KEY_LEFT || key == KEY_UP || key == KEY_RIGHT || key == KEY_DOWN)	return 2/*1<<5*/;	// Action move
+	if ( key == KEY_LEFT || key == KEY_UP || key == KEY_RIGHT || key == KEY_DOWN)	return 2/*1<<5*/;	// Action attack
 
 	return 0;
 }
@@ -24,6 +24,18 @@ int tbob_get_action_move ( int key, int * dy, int * dx)
 	if ( key == TBOB_UP)	(*dy)--, ret = 1;
 	if ( key == TBOB_RIGHT) (*dx)++, ret = 2;
 	if ( key == TBOB_DOWN)	(*dy)++, ret = 3;
+	return ret;
+}
+
+// Utilisation d'un dx et dy pour représenter le déplacement d'un projectile
+// -1 signifie qu'aucun deplacement n'est demandé
+int tbob_get_shoot_way ( int key, int * dy, int * dx)
+{
+	int ret = - 1;
+	if ( key == KEY_LEFT)	(*dx)--, ret = 0;
+	if ( key == KEY_UP)		(*dy)--, ret = 1;
+	if ( key == KEY_RIGHT)	(*dx)++, ret = 2;
+	if ( key == KEY_DOWN)	(*dy)++, ret = 3;
 	return ret;
 }
 
@@ -58,4 +70,12 @@ int tbob_get_next_room ( stage_t s, int row, int col)
 			return i;
 	}
 	return 0;
+}
+
+void tbob_get_new_coord ( int a_move, int * x, int * y)
+{
+	if 		( a_move == 0)	*y = D_HEIGHT / 2, *x = D_WIDTH - 2;
+	else if ( a_move == 1)	*y = D_HEIGHT - 2, *x = D_WIDTH / 2;
+	else if ( a_move == 2)	*y = D_HEIGHT / 2, *x = 1;
+	else if ( a_move == 3)	*y = 1, *x = D_WIDTH / 2;
 }

@@ -325,6 +325,17 @@ void free_stage ( stage_t s)
 	free ( s.mtx);
 }
 
+void _init_item_vectors ( stage_t * s)
+{
+	for (int i = 0; i < 2; i++)
+	{
+		s->p_i[i].x = D_WIDTH / 2;
+		s->p_i[i].y = D_HEIGHT / 2;
+		s->itr_id[i] = 11 + i;
+		s->v_i[i] = NULL;
+	}
+}
+
 stage_t gen_stage ( dungeon_rooms dr, dungeon_items di, dungeon_monsters dm)
 {
 	stage_t s = {.height = 0, .width = 0, .mtx = NULL};
@@ -336,7 +347,14 @@ stage_t gen_stage ( dungeon_rooms dr, dungeon_items di, dungeon_monsters dm)
 	_init_points ( s.p, N_ROOMS);	// Vecteur de point pour stocker les positions dis pieces dans la matrice
 
 	add_stage_rooms ( mtx, rooms, s.p, &(s.height), &(s.width));	// Ajout des pieces generees
-	s.mtx = copy_stage_matrix ( mtx, s.height, s.width);			// Compie de la variable temporaire mtx dans une variable alloué dynamiquement a al bonne taille
+	s.mtx = copy_stage_matrix ( mtx, s.height, s.width);			// Copie de la variable temporaire mtx dans une variable alloué dynamiquement a al bonne taille
+
+	_init_item_vectors ( &s);
+	if ( di.n_items > 0)
+	{
+		s.v_i[0] = itbob_copy_item ( di.items [ rand() % di.n_items]);
+		s.v_i[1] = itbob_copy_item ( di.items [ rand() % di.n_items]);
+	}
 
 	return s;
 }

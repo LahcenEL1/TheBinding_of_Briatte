@@ -40,8 +40,14 @@ int tbob_get_action_type ( int key);
 // -1 signifie qu'aucun deplacement n'est demandé
 int tbob_get_action_move ( int key, int * dy, int * dx);
 
+int tbob_get_shoot_way ( int key, int * dy, int * dx);
+
 int tbob_is_valide_move ( stage_t s, int cur, int y, int x);
 
 int tbob_get_next_room ( stage_t s, int row, int col);
+
+void tbob_get_new_coord ( int a_move, int * x, int * y);
+
+//~ void tbob_engine ( stage_t s, int cur, int * shoot_f, int * bullet_pos_y, int * bullet_pos_x);
 
 #endif

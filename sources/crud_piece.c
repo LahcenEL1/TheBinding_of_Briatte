@@ -13,7 +13,7 @@ void crud_piece_create ( dungeon_rooms * dr )
 
 	room_t * nr = read_rtbob_rooms ( stdin, y, x);
 	add_rtbob_rooms ( dr, nr);	
-	dr->n_rooms++;
+	//~ dr->n_rooms++;
 }
 
 void crud_piece_read ( dungeon_rooms * dr)

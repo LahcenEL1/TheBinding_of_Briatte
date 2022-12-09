@@ -1,4 +1,4 @@
-CLASS=CLI
+CLASS=GUI
 CC=gcc
 CFLAGS=-Wall -g3 -D_$(CLASS)
 PROGNAME=tbob_$(CLASS)

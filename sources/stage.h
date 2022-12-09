@@ -17,9 +17,14 @@ typedef struct
 
 typedef struct
 {
-	point p[14];
 	int height, width;
+	point p[14];
 	room_t *** mtx; // Matrice de pointeur
+	
+	int	itr_id[2];
+	point p_i[2];
+	item_t *v_i[2];
+
 }stage_t;
 
 

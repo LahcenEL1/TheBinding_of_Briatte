@@ -18,7 +18,11 @@ typedef struct
 	item_t ** items;
 }dungeon_items;
 
-
+// Get item pointer by name
+// \param	vect	items pointer vecteur
+// \param	n_vect	number of item pointers
+// \param	name	c string : name of the item
+// \return			item havine 'name' as name
 item_t * get_item_by_name ( item_t ** vect, int n_vect, char * name);
 
 int get_item_pos ( item_t ** vect, int n_vect, char * name);
@@ -50,4 +54,6 @@ void print_as_table_double ( double val);
 void print_as_table ( dungeon_items * di);
 
 void print_as_file ( dungeon_items * di);
+
+item_t * itbob_copy_item ( item_t * i);
 #endif

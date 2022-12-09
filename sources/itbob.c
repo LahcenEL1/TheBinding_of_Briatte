@@ -172,7 +172,7 @@ void write_itbob ( dungeon_items di, char * path)
 		fprintf ( fout, "---\n");
 	}
 	
-	path ? fclose ( fout) : /*fprintf ( fout, "Message : %s", "test_printing\n")*/0;
+	path ? fclose ( fout) : 0;
 }
 
 void print_as_table_bool ( int val)
@@ -200,11 +200,23 @@ void print_as_table ( dungeon_items * di)
 		print_as_table_double ( di->items[i]->shield);
 		print_as_table_double ( di->items[i]->dmg);
 		printf (" --- %s\n", di->items[i]->name);
-		//~ printf ("%2d)  %1d  %1d  %1d % 1.1f  % 1.1f  % 1.1f  --- %s\n", i, di->items[i].ps, di->items[i].ss, di->items[i].flight, di->items[i].hpMax, di->items[i].shield, di->items[i].dmg, di->items[i].name);
 	}
 }
 
 void print_as_file ( dungeon_items * di)
 {
 	write_itbob ( *di, NULL);
+}
+
+item_t * itbob_copy_item ( item_t * i)
+{
+	item_t * it = (item_t *) malloc ( sizeof ( item_t));
+	it->name = (char *) malloc (( strlen(i->name) + 1 ) * sizeof ( char));
+	strcpy ( it->name, i->name);
+	it->shield = i->shield;
+	it->dmg = i->dmg;
+	it->ps = i->ps;
+	it->ss = i->ss;
+	it->flight = i->flight;
+	return it;
 }

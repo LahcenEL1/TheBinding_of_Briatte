@@ -3,7 +3,7 @@
 ## Installation (no docker mode)
 
 - `make` to compile
-- `./a.out` to lauch the app
+- `./tbob_GUI` to lauch the app
 
 ## Personalisation
 

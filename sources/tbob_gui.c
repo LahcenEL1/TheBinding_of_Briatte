@@ -258,7 +258,7 @@ void sdl ( player_t p, stage_t s)
 	for (int i = 0; i < N_ROOMS; i++)
 		t_level[i]= sdl_tbob_piece_texture ( main_w_r, s.mtx[s.p[i].y][s.p[i].x]->piece, t_gap, t_door, t_rock, t_wall, t_spike);
 
-	game_t g = {.t_glob= 0.0f, .t_ref = 0.0f, .t_timer = 0.0f, .quit = 1, .cur = 0, .cur_y = s.p[0].y, .cur_x = s.p[0].x, .w_updated_f = 0, .p = p, .s = s, .r = main_w_r, .tp = t_perso, .ti = NULL, .fb = t_fire, .bg = t_level};
+	game_t g = {.t_glob= 0.0f, .t_ref = 0.0f, .t_timer = 0.0f, .quit = 1, .cur = 0, .cur_y = s.p[0].y, .cur_x = s.p[0].x, .w_updated_f = 0, .p = p, .s = s, .r = main_w_r, .tp = t_perso, .ti = t_item, .fb = t_fire, .bg = t_level};
 
 	sdl_game_loop ( g);
 	
